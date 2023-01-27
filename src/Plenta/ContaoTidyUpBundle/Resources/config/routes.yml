@@ -1,0 +1,5 @@
+tidy_up:
+  resource: "@PlentaContaoTidyUpBundle/Controller"
+  type: annotation
+  defaults:
+    _token_check: false

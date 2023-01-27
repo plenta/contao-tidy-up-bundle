@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+    <file>
+        <body>
+            <trans-unit id="MSC.contao_tidy_up.tidy_up.0">
+                <target>Aufräumen</target>
+            </trans-unit>
+            <trans-unit id="MSC.contao_tidy_up.tidy_up.1">
+                <target>Aufräumen</target>
+            </trans-unit>
+            <trans-unit id="MSC.contao_tidy_up.no_modules_found">
+                <target>Es konnten keine ungenutzten Module gefunden werden.</target>
+            </trans-unit>
+            <trans-unit id="MSC.contao_tidy_up.analyzeTables">
+                <target>Tabellenstruktur analysieren...</target>
+            </trans-unit>
+            <trans-unit id="MSC.contao_tidy_up.analyzeModule">
+                <target>Modul "%s" überprüfen...</target>
+            </trans-unit>
+            <trans-unit id="MSC.contao_tidy_up.done">
+                <target>Überprüfung abgeschlossen.</target>
+            </trans-unit>
+            <trans-unit id="MSC.contao_tidy_up.unusedModules">
+                <target>Die folgenden Module scheinen ungenutzt zu sein:</target>
+            </trans-unit>
+            <trans-unit id="MSC.contao_tidy_up.selectAll">
+                <target>Alle auswählen</target>
+            </trans-unit>
+            <trans-unit id="MSC.contao_tidy_up.deleteModules">
+                <target>Ausgewählte Module löschen</target>
+            </trans-unit>
+            <trans-unit id="MSC.contao_tidy_up.deleteModulesWarning">
+                <target>Löschen der Module auf eigene Gefahr!</target>
+            </trans-unit>
+            <trans-unit id="MSC.contao_tidy_up.no_templates_found">
+                <target>Es konnten keine ungenutzten Templates gefunden werden.</target>
+            </trans-unit>
+            <trans-unit id="MSC.contao_tidy_up.analyzeTemplate">
+                <target>Template "%s" überprüfen...</target>
+            </trans-unit>
+            <trans-unit id="MSC.contao_tidy_up.unusedTemplates">
+                <target>Die folgenden Templates scheinen ungenutzt zu sein:</target>
+            </trans-unit>
+            <trans-unit id="MSC.contao_tidy_up.deleteTemplates">
+                <target>Ausgewählte Templates löschen</target>
+            </trans-unit>
+            <trans-unit id="MSC.contao_tidy_up.deleteTemplatesWarning">
+                <target>Löschen der Templates auf eigene Gefahr!</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

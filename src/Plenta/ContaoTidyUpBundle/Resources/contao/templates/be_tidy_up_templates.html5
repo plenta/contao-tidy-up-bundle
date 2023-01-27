@@ -1,0 +1,120 @@
+<h1 id="tl_welcome" class="main_headline">Contao Tidy Up</h1>
+
+<div class="tasks">
+    <?php if (empty($this->templates)): ?>
+    <p><?= $GLOBALS['TL_LANG']['MSC']['contao_tidy_up']['unusedTemplates'] ?></p>
+</div>
+    <?php else: ?>
+    <div class="task analyze in-progress"><?= $GLOBALS['TL_LANG']['MSC']['contao_tidy_up']['analyzeTables'] ?></div>
+    <?php $count = $i = count($this->templates); foreach ($this->templates as $template => $file): ?>
+    <div class="task pending" data-template="<?= $template ?>">(<?= $i ?>/<?= $count ?>) <?= sprintf($GLOBALS['TL_LANG']['MSC']['contao_tidy_up']['unusedModules'], $file->getBasename('.html5')) ?></div>
+    <?php --$i; endforeach; ?>
+    <div class="task finished pending"><?= $GLOBALS['TL_LANG']['MSC']['contao_tidy_up']['done'] ?></div>
+
+    <div class="unused">
+        <p><?= $GLOBALS['TL_LANG']['MSC']['contao_tidy_up']['unusedTemplates'] ?></p>
+        <form class="tl_form tl_edit_form" method="POST">
+            <input type="hidden" value="<?= REQUEST_TOKEN ?>" name="REQUEST_TOKEN">
+            <div class="tl_formbody_edit">
+                <div class="selectAll">
+                    <input type="checkbox" name="selectAll" id="selectAll" value="1">
+                    <label for="selectAll"><?= $GLOBALS['TL_LANG']['MSC']['contao_tidy_up']['selectAll'] ?></label>
+                </div>
+                <?php foreach ($this->templates as $template => $file): ?>
+                    <div data-template="<?= $template ?>">
+                        <input type="checkbox" name="template[<?= $template ?>]" value="1" id="template_<?= $template ?>">
+                        <input type="hidden" name="template_path[<?= $template ?>]" value="<?= $file->getRelativePathname() ?>">
+                        <label for="template_<?= $template ?>">
+                            <?= $template ?> <span class="tl_gray">[<?= $file->getRelativePathname() ?>]</span>
+                        </label>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <div class="tl_formbody_submit">
+                <div class="tl_submit_container">
+                    <button class="tl_submit"><?= $GLOBALS['TL_LANG']['MSC']['contao_tidy_up']['deleteTemplates'] ?></button>
+                </div>
+            </div>
+            <p class="tl_red"><?= $GLOBALS['TL_LANG']['MSC']['contao_tidy_up']['deleteTemplatesWarning'] ?></p>
+        </form>
+    </div>
+</div>
+
+<script>
+    let unused = [];
+
+    document.addEventListener("DOMContentLoaded", function (event) {
+        let templates = [<?php foreach ($this->templates as $template => $file): ?>'<?= $template ?>',<?php endforeach; ?>];
+        fetch('/app_dev.php/contao/_tidyUp/template/createLookUp').then(r => r.json()).then(r => {
+            let start = document.querySelector('.tasks .task.analyze');
+            start.classList.remove('in-progress');
+            start.classList.add('done');
+            analyzeModules(templates, r['tableLookUp']);
+        })
+    });
+
+    document.querySelector("#selectAll").addEventListener('change', function (event) {
+        document.querySelectorAll('input[type=checkbox][name^="template["]').forEach(function (checkbox) {
+            checkbox.checked = event.target.checked;
+        })
+    });
+
+    document.querySelectorAll('input[type=checkbox][name^="template["]').forEach(function (checkbox) {
+        checkbox.addEventListener('change', function (event) {
+            if (!event.target.checked) {
+                document.querySelector('#selectAll').checked = false;
+            }
+        })
+    })
+
+    function analyzeModules(templates, lookUp) {
+        let item = templates.pop();
+        if (typeof(item) === 'undefined') {
+            console.log(unused);
+            let done = document.querySelector('.tasks .task.finished');
+            done.classList.remove('pending');
+            done.classList.add('in-progress');
+            document.querySelector('.unused').classList.add('visible');
+            return;
+        }
+        let task = document.querySelector('.tasks .task[data-template="' + item + '"]');
+        task.classList.remove('pending');
+        task.classList.add('in-progress');
+        let formData = new FormData();
+        formData.set('template', item);
+        formData.set('lookUp', JSON.stringify(lookUp));
+        formData.set('REQUEST_TOKEN', '<?= REQUEST_TOKEN ?>');
+        fetch('/app_dev.php/contao/_tidyUp/template/analyze', {
+            method: 'POST',
+            body: formData
+        }).then(r => r.json()).then(r => {
+            if (!r[0]) {
+                unused.push(item);
+            } else {
+                document.querySelector('.unused div[data-template="' + item + '"]').remove();
+            }
+            task.classList.remove('in-progress');
+            task.classList.add('done');
+            analyzeModules(templates, lookUp);
+        })
+    }
+</script>
+
+<style>
+    .tasks {
+        padding: 20px;
+    }
+
+    .tasks .pending, .tasks .done {
+        display: none;
+    }
+
+    .unused {
+        display: none;
+    }
+
+    .unused.visible {
+        display: block;
+    }
+</style>
+<?php endif; ?>
