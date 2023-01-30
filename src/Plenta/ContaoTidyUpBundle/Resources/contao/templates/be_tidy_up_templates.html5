@@ -13,7 +13,7 @@
 
     <div class="unused">
         <p><?= $GLOBALS['TL_LANG']['MSC']['contao_tidy_up']['unusedTemplates'] ?></p>
-        <form class="tl_form tl_edit_form" method="POST">
+        <form class="tl_form tl_edit_form" method="POST" onsubmit="if (!confirm('<?= $GLOBALS['TL_LANG']['MSC']['contao_tidy_up']['deleteConfirmTemplate'] ?>')) return false;">
             <input type="hidden" value="<?= REQUEST_TOKEN ?>" name="REQUEST_TOKEN">
             <div class="tl_formbody_edit">
                 <div class="selectAll">

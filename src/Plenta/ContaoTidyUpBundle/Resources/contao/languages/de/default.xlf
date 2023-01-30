@@ -47,6 +47,12 @@
             <trans-unit id="MSC.contao_tidy_up.deleteTemplatesWarning">
                 <target>Löschen der Templates auf eigene Gefahr!</target>
             </trans-unit>
+            <trans-unit id="MSC.contao_tidy_up.deleteConfirmModule">
+                <target>Wollen Sie die ausgewählten Module wirklich löschen?</target>
+            </trans-unit>
+            <trans-unit id="MSC.contao_tidy_up.deleteConfirmTemplate">
+                <target>Wollen Sie die ausgewählten Templates wirklich löschen?</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
