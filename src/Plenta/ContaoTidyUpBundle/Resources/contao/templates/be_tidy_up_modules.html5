@@ -44,7 +44,7 @@
 
     document.addEventListener("DOMContentLoaded", function (event) {
         let modules = [<?php foreach ($this->modules as $module): ?>'<?= $module->id ?>',<?php endforeach; ?>];
-        fetch('/app_dev.php/contao/_tidyUp/module/createLookUp').then(r => r.json()).then(r => {
+        fetch('/contao/_tidyUp/module/createLookUp').then(r => r.json()).then(r => {
             let start = document.querySelector('.tasks .task.analyze');
             start.classList.remove('in-progress');
             start.classList.add('done');
@@ -69,7 +69,6 @@
     function analyzeModules(modules, lookUp) {
         let item = modules.pop();
         if (typeof(item) === 'undefined') {
-            console.log(unused);
             let done = document.querySelector('.tasks .task.finished');
             done.classList.remove('pending');
             done.classList.add('in-progress');
@@ -83,7 +82,7 @@
         formData.set('id', item);
         formData.set('lookUp', JSON.stringify(lookUp));
         formData.set('REQUEST_TOKEN', '<?= REQUEST_TOKEN ?>');
-        fetch('/app_dev.php/contao/_tidyUp/module/analyze', {
+        fetch('/contao/_tidyUp/module/analyze', {
             method: 'POST',
             body: formData
         }).then(r => r.json()).then(r => {
