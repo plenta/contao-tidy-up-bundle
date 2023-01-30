@@ -7,7 +7,7 @@
     <?php else: ?>
     <div class="task analyze in-progress"><?= $GLOBALS['TL_LANG']['MSC']['contao_tidy_up']['analyzeTables'] ?></div>
     <?php $count = $i = count($this->templates); foreach ($this->templates as $template => $file): ?>
-    <div class="task pending" data-template="<?= $template ?>">(<?= $i ?>/<?= $count ?>) <?= sprintf($GLOBALS['TL_LANG']['MSC']['contao_tidy_up']['unusedModules'], $file->getBasename('.html5')) ?></div>
+    <div class="task pending" data-template="<?= $template ?>">(<?= $i ?>/<?= $count ?>) <?= sprintf($GLOBALS['TL_LANG']['MSC']['contao_tidy_up']['analyzeTemplate'], $file->getBasename('.html5')) ?></div>
     <?php --$i; endforeach; ?>
     <div class="task finished pending"><?= $GLOBALS['TL_LANG']['MSC']['contao_tidy_up']['done'] ?></div>
 
