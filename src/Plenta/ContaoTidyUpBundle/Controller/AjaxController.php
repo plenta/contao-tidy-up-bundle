@@ -65,7 +65,7 @@ class AjaxController extends AbstractController
                 if (empty($field['sql'])) {
                     continue;
                 }
-                if ('text' === $field['inputType']) {
+                if ('text' === $field['inputType'] || 'textarea' === $field['inputType']) {
                     if (empty($field['eval']['rgxp'])) {
                         $arr[$table]['text'][] = $fieldName;
                         continue;
@@ -151,7 +151,7 @@ class AjaxController extends AbstractController
                 if (empty($field['sql'])) {
                     continue;
                 }
-                if ('text' === $field['inputType']) {
+                if ('text' === $field['inputType'] || 'textarea' === $field['inputType']) {
                     if (empty($field['eval']['rgxp'])) {
                         $arr[$table]['text'][] = $fieldName;
                         continue;
