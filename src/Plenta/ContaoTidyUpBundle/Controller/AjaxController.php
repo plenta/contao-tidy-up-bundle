@@ -62,7 +62,7 @@ class AjaxController extends AbstractController
                 $arr[$table]['id'][] = 'pid';
             }
             foreach ($dc['fields'] as $fieldName => $field) {
-                if (empty($field['sql'])) {
+                if (empty($field['sql']) || empty($field['inputType'])) {
                     continue;
                 }
                 if ('text' === $field['inputType'] || 'textarea' === $field['inputType']) {
@@ -148,7 +148,7 @@ class AjaxController extends AbstractController
         foreach ($GLOBALS['TL_DCA'] as $table => $dc) {
             $arr[$table] = ['name' => [], 'text' => []];
             foreach ($dc['fields'] as $fieldName => $field) {
-                if (empty($field['sql'])) {
+                if (empty($field['sql']) || empty($field['inputType'])) {
                     continue;
                 }
                 if ('text' === $field['inputType'] || 'textarea' === $field['inputType']) {

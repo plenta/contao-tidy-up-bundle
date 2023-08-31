@@ -22,6 +22,7 @@ class TidyUpModules
 {
     public function run()
     {
+        System::loadLanguageFile('tl_content');
         $request = System::getContainer()->get('request_stack')->getMasterRequest();
         if ('POST' === $request->getMethod()) {
             if (!empty($modules = $request->request->get('module'))) {

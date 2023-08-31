@@ -8,6 +8,18 @@
             <trans-unit id="MSC.contao_tidy_up.tidy_up.1">
                 <target>Aufräumen</target>
             </trans-unit>
+            <trans-unit id="tl_templates.tidyUpTemplates.0">
+                <target>Aufräumen</target>
+            </trans-unit>
+            <trans-unit id="tl_module.contao_tidy_up.tidyUpModules.0">
+                <target>Aufräumen</target>
+            </trans-unit>
+            <trans-unit id="tl_templates.tidyUpTemplates.1">
+                <target>Aufräumen</target>
+            </trans-unit>
+            <trans-unit id="tl_module.contao_tidy_up.tidyUpModules.1">
+                <target>Aufräumen</target>
+            </trans-unit>
             <trans-unit id="MSC.contao_tidy_up.no_modules_found">
                 <target>Es konnten keine ungenutzten Module gefunden werden.</target>
             </trans-unit>

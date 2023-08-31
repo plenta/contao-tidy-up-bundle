@@ -9,3 +9,9 @@ services:
     Plenta\ContaoTidyUpBundle\:
         resource: ../../*
         exclude: ../../{Entity,Migrations,Resources}
+
+    Plenta\ContaoTidyUpBundle\Classes\TidyUpModules:
+        public: true
+
+    Plenta\ContaoTidyUpBundle\Classes\TidyUpTemplates:
+        public: true
