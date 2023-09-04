@@ -23,10 +23,10 @@
     "contao/core-bundle": "^4.4 || ^4.9 || ^4.13"
   },
   "require-dev": {
-    "contao/manager-bundle": "4.4.57",
+    "contao/manager-bundle": "^4.4 || ^4.9 || ^4.13",
     "phpunit/phpunit": "^9.5.10",
     "contao/test-case": "^4.4.0",
-    "symfony/phpunit-bridge": "v5.3.8",
+    "symfony/phpunit-bridge": "^v5.3.8",
     "friendsofphp/php-cs-fixer": "^2.19"
   },
   "extra": {
