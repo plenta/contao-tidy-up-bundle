@@ -123,7 +123,7 @@ class AjaxController extends AbstractController
 
         if ($this->filesystem->exists($this->projectDir.'/templates')) {
             $finder = new Finder();
-            foreach ($finder->files()->in($this->projectDir.'/templates/*') as $file) {
+            foreach ($finder->files()->in($this->projectDir.'/templates') as $file) {
                 if (false !== strpos($file->getContents(), '{{insert_module::'.$id.'}}')) {
                     return new JsonResponse([true]);
                 }
