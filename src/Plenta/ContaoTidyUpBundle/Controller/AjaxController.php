@@ -61,25 +61,27 @@ class AjaxController extends AbstractController
             if (($dc['config']['ptable'] ?? null) === 'tl_module') {
                 $arr[$table]['id'][] = 'pid';
             }
-            foreach ($dc['fields'] as $fieldName => $field) {
-                if (empty($field['sql']) || empty($field['inputType'])) {
-                    continue;
-                }
-                if ('text' === $field['inputType'] || 'textarea' === $field['inputType']) {
-                    if (empty($field['eval']['rgxp'])) {
-                        $arr[$table]['text'][] = $fieldName;
+            if ($dc['fields'] ?? null) {
+                foreach ($dc['fields'] as $fieldName => $field) {
+                    if (empty($field['sql']) || empty($field['inputType'])) {
                         continue;
                     }
-                }
-                if ('moduleWizard' === $field['inputType']) {
-                    $arr[$table]['multiple'][] = $fieldName;
-                    continue;
-                }
-                if ((!empty($field['foreignKey']) && false !== stripos($field['foreignKey'], 'tl_module')) || false !== stripos($fieldName, 'module')) {
-                    if (empty($field['eval']['multiple'])) {
-                        $arr[$table]['id'][] = $fieldName;
-                    } else {
+                    if ('text' === $field['inputType'] || 'textarea' === $field['inputType']) {
+                        if (empty($field['eval']['rgxp'])) {
+                            $arr[$table]['text'][] = $fieldName;
+                            continue;
+                        }
+                    }
+                    if ('moduleWizard' === $field['inputType']) {
                         $arr[$table]['multiple'][] = $fieldName;
+                        continue;
+                    }
+                    if ((!empty($field['foreignKey']) && false !== stripos($field['foreignKey'], 'tl_module')) || false !== stripos($fieldName, 'module')) {
+                        if (empty($field['eval']['multiple'])) {
+                            $arr[$table]['id'][] = $fieldName;
+                        } else {
+                            $arr[$table]['multiple'][] = $fieldName;
+                        }
                     }
                 }
             }
@@ -147,18 +149,20 @@ class AjaxController extends AbstractController
 
         foreach ($GLOBALS['TL_DCA'] as $table => $dc) {
             $arr[$table] = ['name' => [], 'text' => []];
-            foreach ($dc['fields'] as $fieldName => $field) {
-                if (empty($field['sql']) || empty($field['inputType'])) {
-                    continue;
-                }
-                if ('text' === $field['inputType'] || 'textarea' === $field['inputType']) {
-                    if (empty($field['eval']['rgxp'])) {
-                        $arr[$table]['text'][] = $fieldName;
+            if ($dc['fields'] ?? null) {
+                foreach ($dc['fields'] as $fieldName => $field) {
+                    if (empty($field['sql']) || empty($field['inputType'])) {
                         continue;
                     }
-                }
-                if (false !== stripos($fieldName, 'tpl') || false !== stripos($fieldName, 'template')) {
-                    $arr[$table]['name'][] = $fieldName;
+                    if ('text' === $field['inputType'] || 'textarea' === $field['inputType']) {
+                        if (empty($field['eval']['rgxp'])) {
+                            $arr[$table]['text'][] = $fieldName;
+                            continue;
+                        }
+                    }
+                    if (false !== stripos($fieldName, 'tpl') || false !== stripos($fieldName, 'template')) {
+                        $arr[$table]['name'][] = $fieldName;
+                    }
                 }
             }
         }
